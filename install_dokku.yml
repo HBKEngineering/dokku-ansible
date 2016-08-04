@@ -17,6 +17,14 @@
   roles:
     - dokku
 
+- name: Install and configure dokku-mongo
+  hosts: ec2hosts
+  user: ubuntu
+  gather_facts: false
+
+  roles:
+    - dokku-mongo
+
 - name: Add key to Dokku
   hosts: ec2hosts
   connection: local
