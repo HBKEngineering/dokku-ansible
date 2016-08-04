@@ -1,0 +1,11 @@
+- name: Download Mongo plugin
+  command: sudo dokku plugin:install https://github.com/dokku/dokku-mongo.git mongo
+  async: 1200
+
+- name: Create mongo database for the app
+  command: sudo dokku mongo:create {{app_name}}
+  ignore_errors: yes
+
+- name: Expose the mongo db
+  command: sudo dokku mongo:expose {{app_name}} {{mongo_port}}
+  ignore_errors: yes
