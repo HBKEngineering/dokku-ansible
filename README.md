@@ -78,4 +78,7 @@ TODOs
 * Figure out how to inject mongo multi-host config
 * Figure out how to give each server a unique sequence number in it's name (?)
 * Ideally, automate the multiregion thing
+* Figure out how to attach EFS volumes
+* Set mongo to use the EFS volumes
+* Ensure the setup is idempotent
 * ???
