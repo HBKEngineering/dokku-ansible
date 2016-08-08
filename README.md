@@ -81,4 +81,5 @@ TODOs
 * Figure out how to attach EFS volumes
 * Set mongo to use the EFS volumes
 * Ensure the setup is idempotent
+* Set up loggly and newrelic 
 * ???
