@@ -14,7 +14,7 @@ Basic usage
 4. Deploy the app to the infrastructure using deploy playbook:
 
   ```
-  ansible-playbook -i inventory/ec2.py deploy.yml -e "env=example" --private-key keys/example_key.pem
+  ansible-playbook -i inventory/ec2.py deploy.yml -e "region=us-east" --private-key keys/example_key.pem
   ```
   Note you may need to wait 1 min for the inventory cache to clear or you can run ```python inventory/ec2.py --refresh-cache``` first
 5. Use the AWS console to get the DNS name of the load balancer and open it your browser
@@ -49,7 +49,7 @@ Initial set up
 
 Environment .yml file
 =====================
-The environment .yml file (xxxx_vars.yml) holds the specific varibles for the environment you want to build:
+The environment/region .yml file (region/xxxx_vars.yml) holds the specific varibles for the environment you want to build:
 
 ```
 ---
@@ -65,13 +65,6 @@ server:
   zone_1_count: 1
   zone_2_count: 1
 
-
-db:
-  instance_type: db.t2.micro
-  size: 5
-  name: rockbands
-  user: rockbands
-  password: password123
 ```
 
 * control-ip - The IP address(es) that are allowed to SSH to the servers. You must set this to suit where you are running ansible from
@@ -81,11 +74,6 @@ db:
 * server.instance_type - The size of the servers to deploy
 * zone_1_count - The number of servers to deploy to zone 1. If you edit this number and rerun build.yml, ansible will increase or decrease the number of servers in this zone. Can be set to 0.
 * zone_2_count - The number of servers to deploy to zone 2. If you edit this number and rerun build.yml, ansible will increase or decrease the number of servers in this zone. Can be set to 0.
-* db.instance_type - The size of the DB server to deploy
-* db.size - The size of the database (5GB minimum)
-* db.name - The name of the database
-* db.user - The user for the database
-* db.password - The password for the database
 
 
 TODOs

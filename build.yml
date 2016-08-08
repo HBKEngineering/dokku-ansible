@@ -4,7 +4,7 @@
   connection: local
   gather_facts: no
   vars_files:
-    - "env/{{ env }}_vars.yml"
+    - "region/{{ env }}_vars.yml"
 
   roles:
     - ec2-base
