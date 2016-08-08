@@ -77,4 +77,5 @@ TODOs
 * Update security group to expose mongo to the right places
 * Figure out how to inject mongo multi-host config
 * Figure out how to give each server a unique sequence number in it's name (?)
+* Ideally, automate the multiregion thing
 * ???
