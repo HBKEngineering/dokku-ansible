@@ -5,11 +5,11 @@
       region: "{{ region }}"
       instance_type: "{{ server.instance_type }}"
       assign_public_ip: True
-      key_name: "{{ env }}_key"
-      group: ["{{ env}}-vpc-web-internal", "{{ env}}-vpc-ssh", "{{ env}}-vpc-outbound"]
-      instance_tags: { Name: "{{ env }}-z1-web", type: webserver, env: "{{ env }}", az: 1 }
+      key_name: "{{ region }}_key"
+      group: ["{{ region}}-vpc-web-internal", "{{ region}}-vpc-ssh", "{{ region}}-vpc-outbound"]
+      instance_tags: { Name: "{{ region }}-z1-web", type: webserver, region: "{{ region }}", az: 1 }
       exact_count: "{{ server.zone_1_count }}"
-      count_tag: { type: webserver, env: "{{ env }}", az: 1 }
+      count_tag: { type: webserver, region: "{{ region }}", az: 1 }
       vpc_subnet_id: "{{ web_tier_subnet_1 }}"
       zone: "{{ zone_1 }}"
       wait: yes
@@ -26,11 +26,11 @@
       region: "{{ region }}"
       instance_type: "{{ server.instance_type }}"
       assign_public_ip: True
-      key_name: "{{ env }}_key"
-      group: ["{{ env}}-vpc-web-internal", "{{ env}}-vpc-ssh", "{{ env}}-vpc-outbound"]
-      instance_tags: { Name: "{{ env }}-z2-web", type: webserver, env: "{{ env }}", az: 2 }
+      key_name: "{{ region }}_key"
+      group: ["{{ region}}-vpc-web-internal", "{{ region}}-vpc-ssh", "{{ region}}-vpc-outbound"]
+      instance_tags: { Name: "{{ region }}-z2-web", type: webserver, region: "{{ region }}", az: 2 }
       exact_count: "{{ server.zone_2_count }}"
-      count_tag: { type: webserver, env: "{{ env }}", az: 2 }
+      count_tag: { type: webserver, region: "{{ region }}", az: 2 }
       vpc_subnet_id: "{{ web_tier_subnet_2 }}"
       zone: "{{ zone_2 }}"
       wait: yes

@@ -1,4 +1,4 @@
-#!/usr/bin/env bash
+#!/usr/bin/region bash
 
 #uncomment this if you want to grab the latest ec inventory script
 #mkdir inventory

@@ -10,14 +10,7 @@ server:
   zone_1_count: 1
   zone_2_count: 1
 
-db:
-  instance_type: db.t2.micro
-  size: 5
-  name: rockbands
-  user: rockbands
-  password: password123
-
-## This templatizes your environment.  All that needs to be changed is the var:
+## This templatizes your regionironment.  All that needs to be changed is the var:
 ## vpc_base
 
 ## This uses the block of 172.16.0.0/12 instead of 10.0.0.0/8 since all of
@@ -30,16 +23,16 @@ vpc_vars:
   subnets:
     - cidr: "{{ vpc_base }}.0.0/24"
       az: "{{ zone_1 }}"
-      resource_tags: {env: "{{ env }}", tier: web, az: 1, Name: "{{env}}_sn_web_1" }
+      resource_tags: {region: "{{ region }}", tier: web, az: 1, Name: "{{region}}_sn_web_1" }
     - cidr: "{{ vpc_base }}.1.0/24"
       az: "{{ zone_2 }}"
-      resource_tags: {env: "{{ env }}", tier: web, az: 2, Name: "{{env}}_sn_web_2" }
+      resource_tags: {region: "{{ region }}", tier: web, az: 2, Name: "{{region}}_sn_web_2" }
     - cidr: "{{ vpc_base }}.5.0/24"
       az: "{{ zone_1 }}"
-      resource_tags: {env: "{{ env }}", tier: db, az: 1, Name: "{{env}}_sn_db_1" }
+      resource_tags: {region: "{{ region }}", tier: db, az: 1, Name: "{{region}}_sn_db_1" }
     - cidr: "{{ vpc_base }}.6.0/24"
       az: "{{ zone_2 }}"
-      resource_tags: {env: "{{ env }}", tier: db, az: 2, Name: "{{env}}_sn_db_2" }
+      resource_tags: {region: "{{ region }}", tier: db, az: 2, Name: "{{region}}_sn_db_2" }
   route_tables:
     - subnets:
       - "{{ vpc_base }}.0.0/24"

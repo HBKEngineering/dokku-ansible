@@ -1,7 +1,7 @@
 ---
   - name: Create Web security group
     ec2_group:
-      name: "{{ env }}-sg-web"
+      name: "{{ region }}-sg-web"
       region: "{{ region }}"
       description: allow web access from everywhere
       vpc_id: "{{ vpc_id }}"
@@ -14,7 +14,7 @@
 
   - name: Create Internal web security group
     ec2_group:
-      name: "{{ env }}-vpc-web-internal"
+      name: "{{ region }}-vpc-web-internal"
       region: "{{ region }}"
       description: allow web access from internal network only
       vpc_id: "{{ vpc_id }}"
@@ -30,7 +30,7 @@
 
   - name: Create DB security group
     ec2_group:
-      name: "{{ env }}-sg-db"
+      name: "{{ region }}-sg-db"
       region: "{{ region }}"
       description: allow access to db from web tier
       vpc_id: "{{ vpc_id }}"
@@ -47,7 +47,7 @@
 
   - name: Create SSH security group
     ec2_group:
-      name: "{{ env }}-vpc-ssh"
+      name: "{{ region }}-vpc-ssh"
       region: "{{ region }}"
       description: allow ssh access
       vpc_id: "{{ vpc_id }}"
@@ -59,7 +59,7 @@
 
   - name: Create outbound security group
     ec2_group:
-      name: "{{ env }}-vpc-outbound"
+      name: "{{ region }}-vpc-outbound"
       description: allow outbound connections to the internet
       region: "{{ region }}"
       vpc_id: "{{ vpc_id }}"

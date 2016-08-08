@@ -1,10 +1,10 @@
 
 - name: Configure Web servers
-  hosts: tag_type_webserver:&tag_env_{{ env }}
+  hosts: tag_type_webserver:&tag_region_{{ region }}
   user: ubuntu
   sudo: True
   serial: "25%"
   vars_files:
-    - "{{ env }}_vars.yml"
+    - "{{ region }}_vars.yml"
   roles:
     - deploy

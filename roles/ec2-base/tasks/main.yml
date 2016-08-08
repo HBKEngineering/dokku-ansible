@@ -3,7 +3,7 @@
   ec2_vpc:
     region: "{{ region }}"
     internet_gateway: True
-    resource_tags: { Name: "{{ env}}-vpc", env: "{{ env }}" }
+    resource_tags: { Name: "{{ region}}-vpc", region: "{{ region }}" }
     cidr_block: "{{ cidr_block }}"
     subnets: "{{ vpc.subnets }}"
     route_tables: "{{ vpc.route_tables }}"
@@ -16,12 +16,12 @@
 - set_fact: db_tier_subnet_2="{{ vpc.subnets[3].id}}"
 
 - name: Create key pair
-  ec2_key: name="{{ env }}_key" region="{{ region }}"
+  ec2_key: name="{{ region }}_key" region="{{ region }}"
   register: keypair
 
 - name: Write the key to a file
   copy:
-    dest: "keys/{{ env }}_key.pem"
+    dest: "keys/{{ region }}_key.pem"
     content: "{{ keypair.key.private_key }}"
     mode: 0600
   when: keypair.changed

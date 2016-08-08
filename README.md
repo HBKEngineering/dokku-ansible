@@ -5,11 +5,11 @@ These scripts build a multi-AZ set of servers including a VPC, load balancer and
 Basic usage
 ===========
 1. Do initial set up (see below)
-2. Create a environment specific .yml file e.g. example_vars.yml (you can create as many environments as you want/need, see below for more detail)
-3. Build the AWS infrastructure using build playbook, passing in name of environment:
+2. Create a regionironment specific .yml file e.g. example_vars.yml (you can create as many regionironments as you want/need, see below for more detail)
+3. Build the AWS infrastructure using build playbook, passing in name of regionironment:
 
   ```
-  ansible-playbook -i inventory/ec2.py build.yml -e "env=example"
+  ansible-playbook -i inventory/ec2.py build.yml -e "region=example"
   ```
 4. Deploy the app to the infrastructure using deploy playbook:
 
@@ -29,17 +29,17 @@ Initial set up
   ./setup.sh
   ```
 3. Create IAM user using AWS console. Give them "Power User" role and download AWS access key and access secret.
-4. Create env.sh containing access key, access secret and your region:
+4. Create region.sh containing access key, access secret and your region:
 
   ```
   export AWS_ACCESS_KEY_ID=Axxxxxxxxxxxxxxxxxxxxxxxxxx
   export AWS_SECRET_ACCESS_KEY=0xxxxxxxxxxxxxxxxxxxxxxxxxxxxx
   export AWS_REGION=ap-southeast-2
   ```    
-5. Run env.sh to set environment variables (NOTE: YOU WILL NEED TO DO THIS ONCE EVERY SESSION):
+5. Run region.sh to set regionironment variables (NOTE: YOU WILL NEED TO DO THIS ONCE EVERY SESSION):
 
   ```
-  source env.sh
+  source region.sh
   ```    
 6. Test connectivity + set up (thsi can take a moment and should return some JSON if everything worked)
 
@@ -47,9 +47,9 @@ Initial set up
   python inventory/ec2.py
   ```
 
-Environment .yml file
+regionironment .yml file
 =====================
-The environment/region .yml file (region/xxxx_vars.yml) holds the specific varibles for the environment you want to build:
+The regionironment/region .yml file (region/xxxx_vars.yml) holds the specific varibles for the regionironment you want to build:
 
 ```
 ---
@@ -89,7 +89,7 @@ This playbook provisions and configures a Dokku server.
 
 You need ansible 1.3+
 
-First set up these environment variables:
+First set up these regionironment variables:
 ```
 export AWS_ACCESS_KEY_ID=5678
 export AWS_SECRET_ACCESS_KEY=9101112
