@@ -5,7 +5,7 @@
   command: "sudo apt-get update"
 
 - name: Install Dokku
-  shell: "wget -qO - https://raw.github.com/progrium/dokku/v0.2.0/bootstrap.sh | sudo DOKKU_TAG=v0.2.0 bash"
+  shell: "wget -qO - https://raw.github.com/progrium/dokku/v0.7.0/bootstrap.sh | sudo DOKKU_TAG=v0.7.0 bash"
   sudo: true
   async: 1200
 

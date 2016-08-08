@@ -1,16 +1,6 @@
-#
-# This playbook provisions and configures a Dokku server.
-#
-- name: Provision EC2
-  hosts: local
-  connection: local
-  user: root
-
-  roles:
-    - ec2
+---
 
 - name: Install and Configure Dokku
-  hosts: ec2hosts
   user: ubuntu
   gather_facts: false
 
@@ -18,15 +8,20 @@
     - dokku
 
 - name: Install and configure dokku-mongo
-  hosts: ec2hosts
   user: ubuntu
   gather_facts: false
 
   roles:
     - dokku-mongo
 
+- name: Install loggly
+  user: root
+  gather_facts: false
+
+  roles:
+    - dokku_key
+
 - name: Add key to Dokku
-  hosts: ec2hosts
   connection: local
   user: root
   gather_facts: false

@@ -1,11 +1,14 @@
-- name: Download Mongo plugin
-  command: sudo dokku plugin:install https://github.com/dokku/dokku-mongo.git mongo
+---
+# Install Dokku
+
+- name: Update dependencies
+  command: "sudo apt-get update"
+
+- name: Install Dokku
+  shell: "wget -qO - https://raw.github.com/progrium/dokku/v0.2.0/bootstrap.sh | sudo DOKKU_TAG=v0.2.0 bash"
+  sudo: true
   async: 1200
 
-- name: Create mongo database for the app
-  command: sudo dokku mongo:create {{app_name}}
-  ignore_errors: yes
-
-- name: Expose the mongo db
-  command: sudo dokku mongo:expose {{app_name}} {{mongo_port}}
-  ignore_errors: yes
+- name: Add VHOST file
+  shell: echo {{domain}} > /home/dokku/VHOST
+  sudo: true

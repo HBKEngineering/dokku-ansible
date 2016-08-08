@@ -1,0 +1,42 @@
+---
+control_ip: 175.45.102.163/32
+
+region: ap-southeast-2
+zone_1: ap-southeast-2a
+zone_2: ap-southeast-2b
+
+server:
+  instance_type: t2.micro
+  zone_1_count: 1
+  zone_2_count: 1
+
+## This templatizes your environment.  All that needs to be changed is the var:
+## vpc_base
+
+## This uses the block of 172.16.0.0/12 instead of 10.0.0.0/8 since all of
+## EC2 Classic is 10.0.0.0/8, so if needing to use ClassicLink, it will not
+## interfere with internal routing
+
+vpc_base: 172.16 #.0.0/12
+cidr_block: "{{ vpc_base }}.0.0/12"
+vpc_vars:
+  subnets:
+    - cidr: "{{ vpc_base }}.0.0/24"
+      az: "{{ zone_1 }}"
+      resource_tags: {env: "{{ env }}", tier: web, az: 1, Name: "{{env}}_sn_web_1" }
+    - cidr: "{{ vpc_base }}.1.0/24"
+      az: "{{ zone_2 }}"
+      resource_tags: {env: "{{ env }}", tier: web, az: 2, Name: "{{env}}_sn_web_2" }
+    - cidr: "{{ vpc_base }}.5.0/24"
+      az: "{{ zone_1 }}"
+      resource_tags: {env: "{{ env }}", tier: db, az: 1, Name: "{{env}}_sn_db_1" }
+    - cidr: "{{ vpc_base }}.6.0/24"
+      az: "{{ zone_2 }}"
+      resource_tags: {env: "{{ env }}", tier: db, az: 2, Name: "{{env}}_sn_db_2" }
+  route_tables:
+    - subnets:
+      - "{{ vpc_base }}.0.0/24"
+      - "{{ vpc_base }}.1.0/24"
+      routes:
+        - dest: 0.0.0.0/0
+          gw: igw
