@@ -1,14 +1,11 @@
 ---
-# Install Dokku
+# Install Postgres
 
-- name: Update dependencies
-  command: "sudo apt-get update"
-
-- name: Install Dokku
-  shell: "wget -qO - https://raw.github.com/progrium/dokku/v0.2.0/bootstrap.sh | sudo DOKKU_TAG=v0.2.0 bash"
-  sudo: true
+- name: Install Mongo plugin
+  command: dokku plugin:install https://github.com/dokku/dokku-mongo.git mongo
   async: 1200
-
-- name: Add VHOST file
-  shell: echo {{domain}} > /home/dokku/VHOST
   sudo: true
+
+- name: Create Postgres database for the app
+  command: sudo dokku postgresql:create {{app_name}}
+  ignore_errors: yes

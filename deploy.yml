@@ -1,10 +1,10 @@
 
 - name: Configure Web servers
-  hosts: tag_type_webserver:&tag_region_{{ region }}
+  hosts: tag_type_dokkudb
   user: ubuntu
   sudo: True
   serial: "25%"
   vars_files:
-    - "{{ region }}_vars.yml"
+    - "vars.yml"
   roles:
     - deploy

@@ -1,4 +1,5 @@
 ---
+app_name: hbk-web
 control_ip: 175.45.102.163/32
 
 region: us-east
@@ -23,16 +24,16 @@ vpc_vars:
   subnets:
     - cidr: "{{ vpc_base }}.0.0/24"
       az: "{{ zone_1 }}"
-      resource_tags: {region: "{{ region }}", tier: web, az: 1, Name: "{{region}}_sn_web_1" }
+      resource_tags: {region: "{{ region }}", tier: web, az: 1, Name: "{{region}}_subnet_db_1" }
     - cidr: "{{ vpc_base }}.1.0/24"
       az: "{{ zone_2 }}"
-      resource_tags: {region: "{{ region }}", tier: web, az: 2, Name: "{{region}}_sn_web_2" }
+      resource_tags: {region: "{{ region }}", tier: web, az: 2, Name: "{{region}}_subnet_db_2" }
     - cidr: "{{ vpc_base }}.5.0/24"
       az: "{{ zone_1 }}"
-      resource_tags: {region: "{{ region }}", tier: db, az: 1, Name: "{{region}}_sn_db_1" }
+      resource_tags: {region: "{{ region }}", tier: db, az: 1, Name: "{{region}}_subnet_db_1" }
     - cidr: "{{ vpc_base }}.6.0/24"
       az: "{{ zone_2 }}"
-      resource_tags: {region: "{{ region }}", tier: db, az: 2, Name: "{{region}}_sn_db_2" }
+      resource_tags: {region: "{{ region }}", tier: db, az: 2, Name: "{{region}}_subnet_db_2" }
   route_tables:
     - subnets:
       - "{{ vpc_base }}.0.0/24"

@@ -2,4 +2,4 @@
 # Add our key to Dokku to authenticate remote commands.
 
 - name: Upload public key for authenticating gitreceive
-  local_action: shell cat ~/.ssh/id_rsa.pub | ssh -i {{keypair_key}} ubuntu@{{inventory_hostname}} "sudo sshcommand acl-add dokku ansible-dokku"
+  local_action: shell cat ~/.ssh/{dokk_key_name} | ssh -i {{keypair_key}} ubuntu@{{inventory_hostname}} "sudo sshcommand acl-add dokku ansible-dokku"

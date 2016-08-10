@@ -14,13 +14,6 @@
   roles:
     - dokku-mongo
 
-- name: Install loggly
-  user: root
-  gather_facts: false
-
-  roles:
-    - dokku_key
-
 - name: Add key to Dokku
   connection: local
   user: root
