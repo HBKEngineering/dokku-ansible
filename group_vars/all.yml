@@ -1,0 +1,6 @@
+---
+app_name: hbk-web
+dokku_key_path: ~/.ssh/dokkudb.pub
+keypair_name: DokkuDemo
+keypair_key: ~/.ssh/libra.pem
+domain: hbkapps.com

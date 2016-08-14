@@ -1,10 +1,16 @@
-
-- name: Configure Web servers
-  hosts: tag_type_dokkudb
+- name: Install and Configure Dokku
+  hosts: tag_Type_dokkudb
   user: ubuntu
-  sudo: True
-  serial: "25%"
-  vars_files:
-    - "vars.yml"
+  gather_facts: false
+
   roles:
-    - deploy
+    - dokku
+
+- name: Add key to Dokku
+  hosts: tag_Type_dokkudb
+  connection: local
+  user: root
+  gather_facts: false
+
+  roles:
+    - dokku_key

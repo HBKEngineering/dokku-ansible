@@ -3,7 +3,6 @@
 
 - name: Install Mongo plugin
   command: dokku plugin:install https://github.com/dokku/dokku-mongo.git mongo
-  async: 1200
   sudo: true
 
 - name: Create Postgres database for the app
