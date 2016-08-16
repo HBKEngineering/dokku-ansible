@@ -19,7 +19,7 @@
   sudo: true
   
 - name: Clone backup db to orignal
-  command: dokku mongo:clone {{app_name}}_backup
+  command: dokku mongo:clone {{app_name}}_backup {{app_name}}
   ignore_errors: yes
   sudo: true
   environment:
