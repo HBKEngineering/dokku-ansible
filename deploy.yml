@@ -4,7 +4,7 @@
   gather_facts: false
 
   roles:
-    - dokku
+    - set-hostname
 
 - name: Install and Configure Dokku
   hosts: tag_Type_dokkudb
@@ -14,11 +14,10 @@
   roles:
     - dokku
 
-- name: Add key to Dokku
+- name: Configure Mongo 
   hosts: tag_Type_dokkudb
-  connection: local
-  user: root
+  user: ubuntu
   gather_facts: false
 
   roles:
-    - dokku_key
+    - dokku-mongo
