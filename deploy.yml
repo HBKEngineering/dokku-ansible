@@ -1,3 +1,11 @@
+- name: Set Hostname
+  hosts: tag_Type_dokkudb
+  user: ubuntu
+  gather_facts: false
+
+  roles:
+    - dokku
+
 - name: Install and Configure Dokku
   hosts: tag_Type_dokkudb
   user: ubuntu
