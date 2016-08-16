@@ -1,5 +1,0 @@
----
-# Add our key to Dokku to authenticate remote commands.
-
-- name: Upload public key for authenticating gitreceive
-  local_action: shell cat {dokku_key_path} | ssh -i {{dokku_key_path}} ubuntu@{{inventory_hostname}} "ssh-keys:add dokku"
