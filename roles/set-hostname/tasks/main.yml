@@ -1,3 +1,4 @@
+---
 
 # https://gist.github.com/rothgar/8793800
 # Idempotent way to build a /etc/hosts file with Ansible using your Ansible hosts inventory for a source.
