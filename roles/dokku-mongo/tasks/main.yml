@@ -1,5 +1,5 @@
 ---
-# Install Postgres
+# Install Mongo
 
 - name: Install Mongo plugin
   command: dokku plugin:install https://github.com/dokku/dokku-mongo.git mongo
@@ -11,28 +11,33 @@
   ignore_errors: yes
   sudo: true
   environment:
-    MONGO_CONFIG_OPTIONS: {{mongo_options}}
+    MONGO_CONFIG_OPTIONS: '{{mongo_options}}'
 
 - name: Destroy original db
-  command: dokku mongo:destroy {{app_name}}_backup
+  command: dokku mongo:destroy {{app_name}}  --force
   ignore_errors: yes
   sudo: true
   
 - name: Clone backup db to orignal
-  command: dokku mongo:clone {{app_name_backup}}_backup
+  command: dokku mongo:clone {{app_name}}_backup
   ignore_errors: yes
   sudo: true
   environment:
-    MONGO_CONFIG_OPTIONS: {{mongo_options}}
+    MONGO_CONFIG_OPTIONS: '{{mongo_options}}'
 
 - name: Destroy backup
-  command: dokku mongo:destroy {{app_name}}_backup  
+  command: dokku mongo:destroy {{app_name}}_backup --force
   ignore_errors: yes
   sudo: true
   
 - name: Create Mongo database for the app if it still doesn't exist (fresh install)
-  command: mongo expose {{app_name}}
+  command: dokku mongo:create {{app_name}}
   ignore_errors: yes
   environment:
-    MONGO_CONFIG_OPTIONS: {{mongo_options}}
- 
+    MONGO_CONFIG_OPTIONS: '{{mongo_options}}'
+
+- name: Expose the mongo 
+  command: dokku mongo:expose {{app_name}}
+  ignore_errors: yes
+  environment:
+    MONGO_CONFIG_OPTIONS: '{{mongo_options}}'
