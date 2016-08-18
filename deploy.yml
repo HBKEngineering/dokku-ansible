@@ -6,7 +6,21 @@
   roles:
     - set-hostname
 
-- name: Install and Configure Dokku
+- name: Mount and connect to EFS
+  hosts: tag_Type_dokkudb
+  sudo: true 
+  gather_facts: true
+  vars:
+
+    efsFolderList:
+      - {folderPath: "/opt/efs", folderOwner: "dokku", folderGroup: "dokku", folderMode: "0644" , fileSystemId: "{{ec2_tag_EfsId}}"} 
+    awsRegion: "{{ec2_region}}"
+    mountState: mounted
+
+  roles:
+    - fdfk.efsAwsMount
+
+- name: Install and Configure Dokku 
   hosts: tag_Type_dokkudb
   user: ubuntu
   gather_facts: false
