@@ -1,13 +1,19 @@
 ---
 # Install Dokku
+# @todo make sure this only happens once per host / is indempotent
 
 - name: Update dependencies
   command: "sudo apt-get update"
+  
+- name: Download dokku bootrap script
+  get_url: url=https://raw.github.com/progrium/dokku/{{dokku_version}}/bootstrap.sh dest=/tmp/bootstrap-dokku.sh mode=755 force=yes
 
 - name: Install Dokku
-  shell: "wget -qO - https://raw.github.com/progrium/dokku/v0.7.0/bootstrap.sh | sudo DOKKU_TAG=v0.7.0 bash"
+  shell: /tmp/bootstrap-dokku.sh 
+  environment: 
+    - DOKKU_TAG: "{{dokku_version}}"
   sudo: true
-
+  ignore_errors: true
 - name: Add VHOST file
   shell: echo {{domain}} > /home/dokku/VHOST
   sudo: true
