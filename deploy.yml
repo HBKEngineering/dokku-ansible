@@ -13,7 +13,7 @@
   vars:
 
     efsFolderList:
-      - {folderPath: "/opt/efs", folderOwner: "dokku", folderGroup: "dokku", folderMode: "0644" , fileSystemId: "{{ec2_tag_EfsId}}"} 
+      - {folderPath: "/var/lib/dokku", folderOwner: "root", folderGroup: "root", folderMode: "0644" , fileSystemId: "{{ec2_tag_EfsId}}"} 
     awsRegion: "{{ec2_region}}"
     mountState: mounted
 
@@ -33,5 +33,5 @@
   user: ubuntu
   gather_facts: false
 
-  roles:
-    - dokku-mongo
+#   roles:
+#     - dokku-mongo
