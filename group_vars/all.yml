@@ -1,5 +1,4 @@
 ---
-aws_type_tag: dokku-test
 app_name: hbk-web
 keypair_key: ~/.ssh/libra.pem
 domain: hbkapps.com
