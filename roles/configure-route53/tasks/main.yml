@@ -1,0 +1,38 @@
+# Retrieve the details 
+- name: "Get record details about existing route"
+  route53:
+    command: get
+    zone: "{{domain}}"
+    record: "{{ec2_tag_Name}}.{{domain}}"
+    type: CNAME
+  register: rec
+  ignore_errors: yes
+  delegate_to: localhost
+
+- name: "Get record details about existing route"
+  debug: var=rec
+  ignore_errors: yes
+  delegate_to: localhost
+
+# Delete A record using the results from the get command if it exists
+- name: "Delete old records if they exist"
+  route53:
+    command: delete
+    zone: "{{domain}}"
+    record: "{{ rec.set.record }}"
+    ttl: "{{ rec.set.ttl }}"
+    type: "{{ rec.set.type }}"
+    value: "{{ rec.set.value }}"
+  when: rec.set.record is defined
+  delegate_to: localhost
+
+- name: "Create Route"
+  route53:
+    command: create
+    zone: "{{domain}}"
+    record: "{{ec2_tag_Name}}.{{domain}}"
+    type: CNAME
+    ttl: 1
+    value: "{{ec2_public_dns_name}}"
+    wait: yes
+  delegate_to: localhost

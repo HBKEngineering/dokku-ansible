@@ -1,3 +1,9 @@
+- name: Display all variables/facts known for a host
+  gather_facts: true
+  tasks: 
+    - debug: var=hostvars[inventory_hostname]
+  hosts: tag_Type_dokkudb
+
 - name: Set Hostname
   hosts: tag_Type_dokkudb
   user: ubuntu
@@ -35,3 +41,9 @@
 
   roles:
     - dokku-mongo
+
+- name: Configure Route 53
+  hosts: tag_Type_dokkudb
+
+  roles: 
+    - configure-route53
