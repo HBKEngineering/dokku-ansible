@@ -6,35 +6,46 @@
   ignore_errors: yes
   sudo: true
 
+- name: Check if mongo already exists
+  shell: dokku mongo:list | grep {{app_name}}
+  sudo: true
+  register: mongo_check
+  ignore_errors: true
+
+- name: Check if mongo already exists
+  debug: var=mongo_exists verbosity=1
+
 - name: Clone Mongo database
   command: dokku mongo:clone {{app_name}} {{app_name}}_backup
   ignore_errors: yes
   sudo: true
   environment:
     MONGO_CONFIG_OPTIONS: '{{mongo_options}}'
+  when: mongo_check|succeeded
 
 - name: Destroy original db
   command: dokku mongo:destroy {{app_name}}  --force
-  ignore_errors: yes
   sudo: true
-  
+  when: mongo_check|succeeded
+
 - name: Clone backup db to orignal
-  command: dokku mongo:clone {{app_name}}_backup {{app_name}}
-  ignore_errors: yes
+  command: dokku mongo:clone {{app_name}}_backup
   sudo: true
   environment:
     MONGO_CONFIG_OPTIONS: '{{mongo_options}}'
+  when: mongo_check|succeeded
 
 - name: Destroy backup
   command: dokku mongo:destroy {{app_name}}_backup --force
-  ignore_errors: yes
   sudo: true
+  when: mongo_check|succeeded
   
 - name: Create Mongo database for the app if it still doesn't exist (fresh install)
   command: dokku mongo:create {{app_name}}
   ignore_errors: yes
   environment:
     MONGO_CONFIG_OPTIONS: '{{mongo_options}}'
+  when: mongo_check|failed
 
 - name: Expose the mongo 
   command: dokku mongo:expose {{app_name}}
