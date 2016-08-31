@@ -29,7 +29,7 @@
   when: mongo_check|succeeded
 
 - name: Clone backup db to orignal
-  command: dokku mongo:clone {{app_name}}_backup
+  command: dokku mongo:clone {{app_name}}_backup {{app_name}}
   sudo: true
   environment:
     MONGO_CONFIG_OPTIONS: '{{mongo_options}}'
