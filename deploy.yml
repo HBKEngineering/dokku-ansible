@@ -1,8 +1,8 @@
-- name: Display all variables/facts known for a host
-  gather_facts: true
-  tasks: 
-    - debug: var=hostvars[inventory_hostname]
-  hosts: tag_Type_dokkudb
+# - name: Display all variables/facts known for a host
+#   gather_facts: true
+#   tasks: 
+#     - debug: var=hostvars[inventory_hostname]
+#   hosts: tag_Type_dokkudb
 
 - name: Set Hostname
   hosts: tag_Type_dokkudb
@@ -19,12 +19,12 @@
   vars:
 
     efsFolderList:
-      - {folderPath: "/var/lib/dokku", folderOwner: "root", folderGroup: "root", folderMode: "0644" , fileSystemId: "{{ec2_tag_EfsId}}"} 
+      - {folderPath: "/var/lib/dokku", folderOwner: "dokku", folderGroup: "dokku", folderfffMode: "0755" , fileSystemId: "{{ec2_tag_EfsId}}"} 
     awsRegion: "{{ec2_region}}"
     mountState: mounted
 
-  roles:
-    - fdfk.efsAwsMount
+  roles: 
+    - { role: fdfk.efsAwsMount, when: "{{ec2_tag_EfsId}} is defined" }
 
 - name: Install and Configure Dokku 
   hosts: tag_Type_dokkudb
