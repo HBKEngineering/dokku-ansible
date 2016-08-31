@@ -12,6 +12,15 @@
   roles:
     - set-hostname
 
+- name: Create Dokku user
+  hosts: tag_Type_dokkudb
+  user: ubuntu
+  gather_facts: false
+  sudo: true
+
+  tasks:
+    - user: name=dokku
+
 - name: Mount and connect to EFS
   hosts: tag_Type_dokkudb
   sudo: true 
@@ -19,12 +28,12 @@
   vars:
 
     efsFolderList:
-      - {folderPath: "/var/lib/dokku", folderOwner: "dokku", folderGroup: "dokku", folderfffMode: "0755" , fileSystemId: "{{ec2_tag_EfsId}}"} 
+      - {folderPath: "/var/lib/dokku", folderOwner: "dokku", folderGroup: "dokku", folderMode: "0755" , fileSystemId: "{{ec2_tag_EfsId}}"} 
     awsRegion: "{{ec2_region}}"
     mountState: mounted
 
   roles: 
-    - { role: fdfk.efsAwsMount, when: "{{ec2_tag_EfsId}} is defined" }
+    - { role: fdfk.efsAwsMount, when: "ec2_tag_EfsId is defined"}
 
 - name: Install and Configure Dokku 
   hosts: tag_Type_dokkudb
