@@ -12,7 +12,7 @@
   register: mongo_check
   ignore_errors: true
 
-- name: Check if mongo already exists
+- name: Print the output of checking mongo's existence to debug log
   debug: var=mongo_exists verbosity=1
 
 - name: Clone Mongo database
@@ -21,6 +21,8 @@
   sudo: true
   environment:
     MONGO_CONFIG_OPTIONS: '{{mongo_options}}'
+    MONGO_IMAGE='{{mongo_image}}'
+    MONGO_VERSION='{{mongo_version}}'
   when: mongo_check|succeeded
 
 - name: Destroy original db
@@ -33,6 +35,8 @@
   sudo: true
   environment:
     MONGO_CONFIG_OPTIONS: '{{mongo_options}}'
+    MONGO_IMAGE='{{mongo_image}}'
+    MONGO_VERSION='{{mongo_version}}'
   when: mongo_check|succeeded
 
 - name: Destroy backup
@@ -45,6 +49,8 @@
   ignore_errors: yes
   environment:
     MONGO_CONFIG_OPTIONS: '{{mongo_options}}'
+    MONGO_IMAGE='{{mongo_image}}'
+    MONGO_VERSION='{{mongo_version}}'
   when: mongo_check|failed
 
 - name: Expose the mongo 
