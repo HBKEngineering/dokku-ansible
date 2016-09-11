@@ -50,7 +50,7 @@
   environment:
     MONGO_CONFIG_OPTIONS: '{{mongo_options}}'
     MONGO_IMAGE='{{mongo_image}}'
-    MONGO_VERSION='{{mongo_version}}'
+    MONGO_VERSION='{{mongo_image_version}}'
   when: mongo_check|failed
 
 - name: Expose the mongo 
