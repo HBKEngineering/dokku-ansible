@@ -4,5 +4,5 @@ keypair_key: ~/.ssh/libra.pem
 domain: hbkapps.com
 mongo_options: '--directoryperdb'
 mongo_image: 'brettneese/mongodb-plus-mms'
-mongo_image_version: '3.2'
+mongo_image_version: 'latest'
 dokku_version: v0.7.0
