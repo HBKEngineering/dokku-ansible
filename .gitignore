@@ -1,4 +1,4 @@
 *.pem
 .DS_Store
 inventory/*
-group_vars/*
+group_vars/all.yml
