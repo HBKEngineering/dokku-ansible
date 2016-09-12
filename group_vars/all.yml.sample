@@ -5,5 +5,5 @@ domain: hbkapps.com
 mongo_options: '--directoryperdb'
 mongo_image: 'brettneese/mongodb-plus-mms'
 mongo_image_version: '3.2.9'
-mongo_custom_environment: 'mmsApiKey=' # enter mms key here
+mongo_custom_env: 'mmsApiKey=' # enter mms key here
 dokku_version: v0.7.0
