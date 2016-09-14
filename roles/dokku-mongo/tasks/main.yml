@@ -2,7 +2,7 @@
 # Install Mongo
 
 - name: Install Mongo plugin
-  command: dokku plugin:install https://github.com/dokku/dokku-mongo.git mongo
+  command: dokku plugin:install https://github.com/hbkengineering/dokku-mongo.git mongo
   ignore_errors: yes
   sudo: true
 
