@@ -24,6 +24,8 @@
     MONGO_IMAGE: '{{mongo_image}}'
     MONGO_VERSION: '{{mongo_image_version}}'
     MONGO_CUSTOM_ENV: '{{mongo_custom_env}}'
+    MONGO_CUSTOM_DOCKER_OPTS: '{{mongo_custom_docker_opts}}'
+
   when: mongo_check|succeeded
 
 - name: Destroy original db
@@ -39,6 +41,8 @@
     MONGO_IMAGE: '{{mongo_image}}'
     MONGO_VERSION: '{{mongo_image_version}}'
     MONGO_CUSTOM_ENV: '{{mongo_custom_env}}'
+    MONGO_CUSTOM_DOCKER_OPTS: '{{mongo_custom_docker_opts}}'
+
   when: mongo_check|succeeded
 
 - name: Destroy backup
@@ -54,6 +58,8 @@
     MONGO_IMAGE: '{{mongo_image}}'
     MONGO_VERSION: '{{mongo_image_version}}'
     MONGO_CUSTOM_ENV: '{{mongo_custom_env}}'
+    MONGO_CUSTOM_DOCKER_OPTS: '{{mongo_custom_docker_opts}}'
+
   when: mongo_check|failed
 
 - name: Expose the mongo 
